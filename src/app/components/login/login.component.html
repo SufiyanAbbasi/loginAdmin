@@ -1,0 +1,45 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12 col-md-6 mt-2">
+            <div class="box">
+                <div class="container-login">
+                    <div class="signin-form ">
+                    
+                        <form>
+                            <div class="text-center">
+                                <img src="../../assets/images/logo.png" alt="" width="55px" height="55px">
+                                <h2 class="mt-5">Admin Login</h2>
+                                <p>This is a secure system and you will need to provide tour login detalis to access the
+                                    site</p>
+                            </div>
+                            <div class="input-group">
+                                <!-- <label for="username">Email</label> -->
+                                <input type="text" id="email" placeholder="Email" #email="ngModel"  [(ngModel)]="userObj.email"
+                                    name="EmailId" required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$">
+                                <div *ngIf="email.touched && email.invalid" class="text-danger">
+                                    <small *ngIf="email.errors?.['required']">Email is required</small>
+                                    <small *ngIf="email.errors?.['pattern']">Invalid email format</small>
+                                    <small *ngIf="email.errors?.['minlength']">Email must be at least 3 characters
+                                        long</small>
+                                </div>
+                            </div>
+
+                            <div class="input-group">
+                                <!-- <label for="password">Password</label> -->
+                                <input type="password" #password="ngModel" placeholder="Password" id="password" [(ngModel)]="userObj.password"
+                                    name="Password" required>
+                                <div *ngIf="password.touched" class="text-danger">
+                                    <small *ngIf="password.errors?.['required']">Password is required</small>
+                                </div>
+                            </div>
+                            <button type="button" (click)="onLogin()">Log In</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 d-none d-md-block bgimg">
+
+        </div>
+    </div>
+</div>
