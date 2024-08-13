@@ -1,0 +1,48 @@
+<div class="container mt-2" style="background: #F8F9FE;">
+    <div class="py-5 px-5">
+        <div class="d-flex justify-content-between">
+            <p class="fs-4">Orders</p>
+            <input type="text" placeholder="Search..." (input)="onSearchChange($event)" />
+        
+        </div>
+        <div>
+            <label for="entries">Show</label>
+            <select id="entries" (change)="onEntriesChange($event)">
+              <option value="3">3</option>
+              <option value="6">6</option>
+              <option value="10">10</option>
+            </select>
+          
+          </div>
+          
+          <table class="table table-bordered">
+            <thead>
+              <tr>
+                <th>Order ID</th>
+                <th>Order By</th>
+                <th>Order At</th>
+                <th>Pickup Date</th>
+                <th>Delivery Date</th>
+                <th>Amount</th>
+                <th>Order Status</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let order of filteredOrders">
+                <td>{{ order.orderId }}</td>
+                <td>{{ order.orderBy }}</td>
+                <td>{{ order.orderAt }}</td>
+                <td>{{ order.pickupDate }}</td>
+                <td>{{ order.deliveryDate }}</td>
+                <td>{{ order.amount }}</td>
+                <td>{{ order.orderStatus }}</td>
+                <td>
+                  <button class="btn btn-primary">Edit</button>
+                  <button class="btn btn-danger">Delete</button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          
+</div>

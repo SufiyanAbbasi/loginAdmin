@@ -1,0 +1,102 @@
+<div class="container mt-2" style="background: #F8F9FE;">
+  <div class="py-5 px-5">
+    <div class="d-flex">
+      <p class="fs-4">Dashboard</p>
+      <fa-icon [icon]="dashboard" class="ms-4 mt-2 text-success fa-1x"></fa-icon> &nbsp;
+      <p class="fs-5 mt-1 opacity-50"> / &nbsp;Dashboard</p>
+    </div>
+
+
+
+    <div class="row g-4 mt-4">
+      @for(items of list; track items){
+      <div class="col-12  col-md-6 col-lg-3">
+        <div class="bg-white rounded-2 border p-3">
+          <div class=" w-25 d-flex justify-content-center py-1 px-2 rounded-4" [style.backgroundColor]="items.color"
+            style="margin-top: -35px;">
+            <fa-icon [icon]="items.icon" class="fa-2x text-white"></fa-icon>
+          </div>
+          <div>
+            <p class="text-uppercase opacity-50 d-flex justify-content-end fs-5 fw-bold me-3">{{items.title}}</p>
+            <p class="fs-2 text-center fw-bold">{{items.numbers}}</p>
+          </div>
+        </div>
+      </div>
+      }
+
+    </div>
+
+    <div class="row mt-5 ">
+      <div class="col-md-8">
+        <div class="table bg-white p-3">
+          <div class="d-flex justify-content-between px-3">
+            <p class="fs-4">Revenue</p>
+            <div class="mb-3 row">
+              <label for="table-filtering-search" class="col-xs-3 col-sm-auto col-form-label">Full text search:</label>
+              <div class="col-xs-3 col-sm-auto">
+                <input id="table-filtering-search" class="form-control" type="text" [formControl]="filter" />
+              </div>
+            </div>
+          </div>
+          <hr>
+          <form>
+
+          </form>
+
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <th scope="col">Delivery Date</th>
+                <th scope="col">Order By</th>
+                <th scope="col">Quantitiy</th>
+                <th scope="col">Total</th>
+
+              </tr>
+            </thead>
+            <tbody>
+              @for (country of countries$ | async; track country.name; let i = $index) {
+              <tr>
+                <th scope="row">{{ i + 1 }}</th>
+                <td>
+                  <img [src]="'https://upload.wikimedia.org/wikipedia/commons/' + country.flag"
+                    [alt]="'The flag of ' + country.name" class="me-2" style="width: 20px" />
+                  <ngb-highlight [result]="country.name" [term]="filter.value" />
+                </td>
+                <td><ngb-highlight [result]="country.area | number" [term]="filter.value" /></td>
+                <td><ngb-highlight [result]="country.population | number" [term]="filter.value" /></td>
+              </tr>
+              } @empty {
+              <tr>
+                <td colspan="4" style="text-align: center">No countries found</td>
+              </tr>
+              }
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="bg-success d-flex h-25 rounded-3" style="background-image: url(../../../assets/images/overview.svg);background-position: center center;
+
+;">
+          <p class="ms-2 text-white fs-4 mt-4 p-2">Overview</p>
+        </div>
+        <div class="row">
+          @for(item of overviewList; track item){
+          <div class=" col-md-6">
+            <div class="d-flex mt-4">
+              <div class=" d-flex justify-content-center  align-items-center rounded-3"
+                [style.backgroundColor]="item.bgcolor">
+                <fa-icon [icon]="user" [style.color]="item.color" class="fa-2x py-2 px-3"></fa-icon>
+              </div>
+              <div class="ms-3 mt-2">
+                <span>{{item.numbers}}</span><br>
+                <span class="opacity-50">{{item.type}}</span>
+              </div>
+            </div>
+          </div>
+        }
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

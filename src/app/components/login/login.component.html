@@ -2,38 +2,74 @@
     <div class="row">
         <div class="col-12 col-md-6 mt-2">
             <div class="box">
-                <div class="container-login">
+                <div class="container-login ">
                     <div class="signin-form ">
                     
-                        <form>
-                            <div class="text-center">
-                                <img src="../../assets/images/logo.png" alt="" width="55px" height="55px">
+                        <form *ngIf="!isSignupMode" class="">
+                            <div class="text-center pt-5 pt">
+                                <img src="../../../assets/images/logo.png" alt="" width="55px" height="55px">
                                 <h2 class="mt-5">Admin Login</h2>
-                                <p>This is a secure system and you will need to provide tour login detalis to access the
+                                <p>This is a secure system and you will need to provide your login details to access the
                                     site</p>
                             </div>
                             <div class="input-group">
-                                <!-- <label for="username">Email</label> -->
-                                <input type="text" id="email" placeholder="Email" #email="ngModel"  [(ngModel)]="userObj.email"
+                                <input type="text" id="email" placeholder="Email" #email="ngModel" [(ngModel)]="userObj.email"
                                     name="EmailId" required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$">
                                 <div *ngIf="email.touched && email.invalid" class="text-danger">
                                     <small *ngIf="email.errors?.['required']">Email is required</small>
                                     <small *ngIf="email.errors?.['pattern']">Invalid email format</small>
-                                    <small *ngIf="email.errors?.['minlength']">Email must be at least 3 characters
-                                        long</small>
                                 </div>
                             </div>
 
                             <div class="input-group">
-                                <!-- <label for="password">Password</label> -->
                                 <input type="password" #password="ngModel" placeholder="Password" id="password" [(ngModel)]="userObj.password"
                                     name="Password" required>
-                                <div *ngIf="password.touched" class="text-danger">
+                                <div *ngIf="password.touched && password.invalid" class="text-danger">
                                     <small *ngIf="password.errors?.['required']">Password is required</small>
                                 </div>
                             </div>
+                            <div class="text-center">
+                                <p class="small" >Doesn't have an account? Please <u (click)="toggleSignupMode()" style="cursor: pointer;">Register</u>.</p>
+                            </div>
                             <button type="button" (click)="onLogin()">Log In</button>
                         </form>
+
+                        <form *ngIf="isSignupMode" class="mt-5 mt-md-0">
+                            <div class="text-center">
+                                <img src="../../assets/images/logo.png" alt="" width="55px" height="55px">
+                                <h2 class="mt-5">Sign Up</h2>
+                                <p>Create your account to access the site</p>
+                            </div>
+                            <div class="input-group">
+                                <input type="text" id="name" placeholder="Username" #name="ngModel" [(ngModel)]="userObj.username"
+                                    name="UserName" required>
+                                <div *ngIf="name.touched && name.invalid" class="text-danger">
+                                    <small *ngIf="name.errors?.['required']">Name is required</small>
+                                </div>
+                            </div>
+                            <div class="input-group">
+                                <input type="text" id="email" placeholder="Email" #email="ngModel" [(ngModel)]="userObj.email"
+                                    name="EmailId" required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$">
+                                <div *ngIf="email.touched && email.invalid" class="text-danger">
+                                    <small *ngIf="email.errors?.['required']">Email is required</small>
+                                    <small *ngIf="email.errors?.['pattern']">Invalid email format</small>
+                                </div>
+                            </div>
+
+                            <div class="input-group">
+                                <input type="password" #password="ngModel" placeholder="Password" id="password" [(ngModel)]="userObj.password"
+                                    name="Password" required>
+                                <div *ngIf="password.touched && password.invalid" class="text-danger">
+                                    <small *ngIf="password.errors?.['required']">Password is required</small>
+                                </div>
+                            </div>
+                            <div class="text-center">
+                                <p class="small">Already have an account? <u (click)="toggleSignupMode()" style="cursor: pointer;">Login here</u>
+                                </p>
+                            </div>
+                            <button type="button" (click)="onSignup()">Sign Up</button>
+                        </form>
+
                     </div>
                 </div>
             </div>
